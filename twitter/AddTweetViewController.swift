@@ -23,13 +23,13 @@ class AddTweetViewController: UIViewController {
     @IBOutlet weak var tweetText: UITextView!
     
     
-    @IBAction func onTweet(sender: AnyObject) {
+    @IBAction func onTweetAction(sender: AnyObject) {
         
         print("tweet text: \(tweetText.text)")
         
         TwitterClient.client.tweet(tweetText.text)
-        
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
