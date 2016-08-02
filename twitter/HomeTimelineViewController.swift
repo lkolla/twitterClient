@@ -66,16 +66,15 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        
-        let cell = sender as! UITableViewCell
-        
-        let indexPath = self.tableView.indexPathForCell(cell)
-        
-        let tweet = tweets[indexPath!.row]
-        
-        let tweetViewController = segue.destinationViewController as? TweetViewController
-        tweetViewController?.tweet = tweet
-        
+        let controller = segue.destinationViewController as UIViewController;
+        if( controller.isKindOfClass(TweetViewController)){
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let tweet = tweets[indexPath!.row]
+            let tweetViewController = segue.destinationViewController as? TweetViewController
+            tweetViewController?.tweet = tweet
+        }
+
     }
  
 

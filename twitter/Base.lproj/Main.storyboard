@@ -104,7 +104,7 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HLl-mA-XFF" id="92t-NT-Lt6">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="77.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="78"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KfC-me-IGi">
@@ -181,6 +181,9 @@
                                 <rect key="frame" x="233" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New"/>
+                                <connections>
+                                    <segue destination="U28-jL-hNk" kind="modal" id="Gwk-XU-yQn"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -191,6 +194,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91h-ta-bnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1120" y="383"/>
+        </scene>
+        <!--Add Tweet View Controller-->
+        <scene sceneID="N7L-YP-P83">
+            <objects>
+                <viewController id="U28-jL-hNk" customClass="AddTweetViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QWx-ST-Le4"/>
+                        <viewControllerLayoutGuide type="bottom" id="HXG-yg-cgb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mjc-zE-T1T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C2Z-kD-PSF">
+                                <rect key="frame" x="8" y="28" width="102" height="111"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvi-k9-LC9">
+                                <rect key="frame" x="139" y="34" width="132" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emo-cr-fe8">
+                                <rect key="frame" x="139" y="87" width="132" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AZ-Cu-oTd">
+                                <rect key="frame" x="50" y="357" width="46" height="30"/>
+                                <state key="normal" title="tweet"/>
+                                <connections>
+                                    <action selector="onTweet:" destination="U28-jL-hNk" eventType="touchUpInside" id="78o-RT-pUV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tweet: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49m-ur-hEG">
+                                <rect key="frame" x="11" y="153" width="56" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eps-nF-t5v">
+                                <rect key="frame" x="8" y="182" width="292" height="132"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="profileDisplayName" destination="Yvi-k9-LC9" id="SKH-5i-VVI"/>
+                        <outlet property="profileImage" destination="C2Z-kD-PSF" id="Ipn-aI-i5u"/>
+                        <outlet property="profileScreenName" destination="emo-cr-fe8" id="RDB-La-rgX"/>
+                        <outlet property="tweetText" destination="eps-nF-t5v" id="XSy-mG-Exx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="weS-UN-btX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628" y="174"/>
         </scene>
         <!--Tweet View Controller-->
         <scene sceneID="83a-Lr-cNb">
@@ -285,7 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIR-4a-JTR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="383"/>
+            <point key="canvasLocation" x="1628" y="904"/>
         </scene>
         <!--Twitter Login View Controller-->
         <scene sceneID="Gqe-Lu-nzT">

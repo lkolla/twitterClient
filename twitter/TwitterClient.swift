@@ -95,7 +95,51 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     }
     
+    func currentUser(success: (User) -> (), failure: (NSError) -> ()){
+        
+        print("Inside.. current user")
+        
+        
+        GET(Constants.VERIFY_CREDENTIAL_URL,
+            parameters: nil,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                
+                let userDict = response as! NSDictionary
+                
+                let user = User(user: userDict)
+                
+                success(user)
+                
+                
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                
+                print("error @ currentUser \(error.localizedDescription)")
+                
+                failure(error)
+        })
+        
+    }
+   
+    func tweet(tweet: NSString){
+        
+        print("tweet text in tweet: \(tweet)")
+        
+        let params: NSDictionary = ["status":tweet]
+        
+        POST("1.1/statuses/update.json",
+             parameters: params,
+             success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+                print("retweet response: \(response)")
+            }, failure:  { (task: NSURLSessionDataTask?, error: NSError) in
+                print("error while retweet \(error.localizedDescription)")
+        })
+        
+    }
+    
+    
     func retweet(tweetId: NSString){
+        
         
         POST("1.1/statuses/retweet/\(tweetId).json",
              parameters: nil,
