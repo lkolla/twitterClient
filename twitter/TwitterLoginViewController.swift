@@ -10,6 +10,8 @@ import UIKit
 
 class TwitterLoginViewController: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,25 @@ class TwitterLoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onLoginAction(sender: AnyObject) {
+        
+        print("inside onlogin action")
+        
+        TwitterClient.client.login({
+            
+            print("login success.. moving to home timeline")
+            
+            self.performSegueWithIdentifier("loginToHomeTimeline", sender: self)
+            
+        }, failure:  { (error: NSError) in
+            
+            print("error@onLoginAction \(error.localizedDescription)")
+            
+        })
+        
+        
+        
+    }
 
     /*
     // MARK: - Navigation

@@ -7,13 +7,37 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetViewController: UIViewController {
+    
+    var tweet: Tweet!
 
+    @IBOutlet weak var profileImageURL: UIImageView!
+    
+    @IBOutlet weak var profileName: UILabel!
+    
+    @IBOutlet weak var profileScreenName: UILabel!
+    
+    
+    @IBOutlet weak var tweetText: UILabel!
+    
+    @IBOutlet weak var retweetCount: UILabel!
+    
+    @IBOutlet weak var favoritesCount: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        profileImageURL.setImageWithURL(NSURL(string: tweet.profileImageURL as String)!)
+        profileName.text = tweet.profileName as String
+        profileScreenName.text = tweet.profileScreenName as String
+        tweetText.text = tweet.text as String
+        retweetCount.text = String (tweet.retweetCount)
+        favoritesCount.text = String(tweet.favoritesCount)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +45,18 @@ class TweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onReply(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func onRetweet(sender: AnyObject) {
+        TwitterClient.client.retweet(tweet.tweetId)
+    }
+    
 
+    @IBAction func onFavorite(sender: AnyObject) {
+        TwitterClient.client.favoriteTweet(tweet.tweetId)
+    }
     /*
     // MARK: - Navigation
 

@@ -7,9 +7,37 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetCell: UITableViewCell {
 
+    
+    @IBOutlet weak var tweetImage: UIImageView!
+    
+    @IBOutlet weak var userDisplayName: UILabel!
+    
+    @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var tweetTimestamp: UILabel!
+    
+    @IBOutlet weak var tweetText: UILabel!
+    
+    
+    var tweet: Tweet!{
+        //following closure will be used to set the businesscell's properties.
+        didSet{
+            
+            tweetImage.setImageWithURL(NSURL(string:tweet.profileImageURL as String)!)
+            userDisplayName.text = tweet.profileName as String
+            userName.text = tweet.profileScreenName as String
+            tweetText.text = tweet.text as String
+            tweetTimestamp.text = tweet.timestamp.description
+            
+            
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
