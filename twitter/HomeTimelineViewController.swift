@@ -9,9 +9,11 @@
 import UIKit
 
 class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    
     @IBOutlet weak var tableView: UITableView!
-    //@IBOutlet weak var tableView: UITableView!
+    let uiRefreshControl: UIRefreshControl = UIRefreshControl()
+
     
     var tweets: [Tweet]!
     
@@ -21,16 +23,32 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        uiRefreshControl.attributedTitle = Constants.HOME_TIMELINE_REFRESH_CONTROL_TITLE
+        uiRefreshControl.addTarget(self, action:#selector(HomeTimelineViewController.reloadTweets), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(uiRefreshControl)
+        
+        loadTweets()
+
+    }
     
-        TwitterClient.client.homeTimeline({ (tweets: [Tweet]) in
-                self.tweets = tweets
-                self.tableView.reloadData()
-        }) { (error: NSError) in
-                print("error: \(error.localizedDescription)")
-        }
+    func reloadTweets(){
+    
+        print ("inside re-load tweets.")
+        
+        loadTweets()
+    
+        self.uiRefreshControl.endRefreshing()
     }
 
-    
+    func loadTweets () {
+        
+        TwitterClient.client.homeTimeline({ (tweets: [Tweet]) in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }) { (error: NSError) in
+            print("error: \(error.localizedDescription)")
+        }
+    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,7 +72,6 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

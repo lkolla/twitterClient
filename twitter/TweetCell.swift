@@ -31,7 +31,7 @@ class TweetCell: UITableViewCell {
             userDisplayName.text = tweet.profileName as String
             userName.text = tweet.profileScreenName as String
             tweetText.text = tweet.text as String
-            tweetTimestamp.text = tweet.timestamp.description
+            tweetTimestamp.text = tweet.processedTimestamp as String
             
             
         }

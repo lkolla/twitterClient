@@ -73,11 +73,14 @@ class TwitterClient: BDBOAuth1SessionManager {
         
         print("Inside.. Hometimeline")
         
+        let params: NSDictionary = ["count":200]
         
         GET(Constants.HOME_TIMELINE_URL,
-            parameters: nil,
+            parameters: params,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                
+                print("response from home timeline \(response)")
                 
                 let dictionaries = response as! [NSDictionary]
                 

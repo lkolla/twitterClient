@@ -13,11 +13,13 @@ class Tweet: NSObject {
     var tweetId: NSString!
     var text: NSString!
     var timestamp: NSDate!
+    var processedTimestamp: NSString!
     var retweetCount: Int = 0
     var favoritesCount: Int = 0
     var profileImageURL: NSString!
     var profileName: NSString!
     var profileScreenName: NSString!
+    
     
     init(dict:NSDictionary) {
         
@@ -34,7 +36,28 @@ class Tweet: NSObject {
             //Tue Aug 28 19:59:34 +0000 2012
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.dateFromString(timestampString)
+            
+            let timeInterval = -Int(timestamp.timeIntervalSinceNow)
+            
+            if timeInterval < 60 {
+                processedTimestamp = "\(timeInterval)s ago"
+            } else if timeInterval < 3600 {
+                let mins = timeInterval / 60
+                processedTimestamp = "\(mins)m ago"
+            } else if timeInterval < 86400 {
+                let hours = (timeInterval / 60) / 60
+                processedTimestamp = "\(hours)h ago"
+            } else {
+                let days = ((timeInterval / 60) / 60) / 24
+                processedTimestamp = "\(days)d ago"
+            }
+            
         }
+        
+        
+
+        
+        
         
         let user = dict[Constants.USER] as! NSDictionary
         

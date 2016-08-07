@@ -38,5 +38,9 @@ struct Constants {
     
     static let GET = "GET"
     static let POST = "POST"
+    
+    
+    static let HOME_TIMELINE_REFRESH_CONTROL_TITLE = NSAttributedString(string: "Pull to load latest tweets")
+    
 
 }

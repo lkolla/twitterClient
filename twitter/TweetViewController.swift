@@ -26,11 +26,24 @@ class TweetViewController: UIViewController {
     
     @IBOutlet weak var favoritesCount: UILabel!
     
+    @IBOutlet weak var retweetButton: UIButton!
+    
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    //let retweetUnselect = UIImage(named: "retweet-unselected.jpeg") as UIImage!
+    
+    
+    ///trainings/ios/twitter/twitter/Assets.xcassets/retweet-selected.imageset/retweet-selected.png
+    ///trainings/ios/twitter/twitter/Assets.xcassets/retweet-unselected.imageset/retweet-unselected.jpeg
+    
+    @IBOutlet weak var replyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        retweetButton.setImage(UIImage(named: "retweet-selected"), forState: UIControlState.Normal)
         
         profileImageURL.setImageWithURL(NSURL(string: tweet.profileImageURL as String)!)
         profileName.text = tweet.profileName as String
