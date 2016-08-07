@@ -14,14 +14,50 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var tableView: UITableView!
     let uiRefreshControl: UIRefreshControl = UIRefreshControl()
 
+    @IBOutlet weak var menuView: UIView!
     
     var tweets: [Tweet]!
     
+    @IBOutlet weak var leftMarginConstraint: NSLayoutConstraint!
+    
+    var original: CGFloat!
+    
+    @IBAction func onMenu(sender: UIPanGestureRecognizer) {
+        
+        let translation = sender.translationInView(tableView)
+        
+        let velocity = sender.velocityInView(tableView)
+        
+        
+        
+        if(sender.state == UIGestureRecognizerState.Began){
+        
+            original = leftMarginConstraint.constant
+            
+        }else if (sender.state == UIGestureRecognizerState.Changed){
+            
+            leftMarginConstraint.constant = original + translation.x
+        
+        }else if (sender.state == UIGestureRecognizerState.Ended){
+            
+            UIView.animateWithDuration(1, animations: {
+                if velocity.x > 0 {
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 380
+                }else {
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 630
+                }
+                self.view.layoutIfNeeded()
+            })
+        }
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        self.leftMarginConstraint.constant = self.view.frame.size.width - 630
         
         uiRefreshControl.attributedTitle = Constants.HOME_TIMELINE_REFRESH_CONTROL_TITLE
         uiRefreshControl.addTarget(self, action:#selector(HomeTimelineViewController.reloadTweets), forControlEvents: UIControlEvents.ValueChanged)

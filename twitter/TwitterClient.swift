@@ -80,7 +80,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
-                print("response from home timeline \(response)")
+                //print("response from home timeline \(response)")
                 
                 let dictionaries = response as! [NSDictionary]
                 

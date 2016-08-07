@@ -30,8 +30,9 @@ class TweetViewController: UIViewController {
     
     @IBOutlet weak var favoriteButton: UIButton!
     
-    //let retweetUnselect = UIImage(named: "retweet-unselected.jpeg") as UIImage!
+    let retweetUnselect = UIImage(named: "retweet-unselected") as UIImage!
     
+    @IBOutlet weak var tweetImageURL: UIImageView!
     
     ///trainings/ios/twitter/twitter/Assets.xcassets/retweet-selected.imageset/retweet-selected.png
     ///trainings/ios/twitter/twitter/Assets.xcassets/retweet-unselected.imageset/retweet-unselected.jpeg
@@ -43,7 +44,9 @@ class TweetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        retweetButton.setImage(UIImage(named: "retweet-selected"), forState: UIControlState.Normal)
+        //retweetButton.setImage(retweetUnselect, forState: UIControlState.Normal)
+        //retweetButton.imageView!.contentMode = UIViewContentMode.ScaleAspectFill
+
         
         profileImageURL.setImageWithURL(NSURL(string: tweet.profileImageURL as String)!)
         profileName.text = tweet.profileName as String
@@ -51,6 +54,11 @@ class TweetViewController: UIViewController {
         tweetText.text = tweet.text as String
         retweetCount.text = String (tweet.retweetCount)
         favoritesCount.text = String(tweet.favoritesCount)
+        if tweet.tweetImageURL != nil {
+            tweetImageURL.setImageWithURL(NSURL(string: tweet.tweetImageURL as String)!)
+        }else{
+            tweetImageURL.hidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {

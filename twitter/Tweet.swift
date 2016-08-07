@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 class Tweet: NSObject {
     
@@ -19,6 +20,7 @@ class Tweet: NSObject {
     var profileImageURL: NSString!
     var profileName: NSString!
     var profileScreenName: NSString!
+    var tweetImageURL: NSString!
     
     
     init(dict:NSDictionary) {
@@ -64,6 +66,21 @@ class Tweet: NSObject {
         profileName = user[Constants.NAME] as! NSString
         profileScreenName = user[Constants.SNAME] as! NSString
         profileImageURL = user[Constants.IMAGE_URL] as! NSString
+        
+        
+        let entities = dict["entities"] as! NSDictionary
+        
+        if  entities["media"] != nil {
+            let media = entities["media"] as! NSArray
+            
+            let m = media.firstObject as! NSDictionary
+            
+            print ("https URL: \(m["media_url_https"])")
+            
+            tweetImageURL = m["media_url_https"] as! NSString
+        }
+        
+        
         
     }
     
