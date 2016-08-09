@@ -108,6 +108,8 @@ class TwitterClient: BDBOAuth1SessionManager {
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
+                print("response from verify user: \(response)")
+                
                 let userDict = response as! NSDictionary
                 
                 let user = User(user: userDict)

@@ -24,9 +24,9 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func onMenu(sender: UIPanGestureRecognizer) {
         
-        let translation = sender.translationInView(tableView)
+        let translation = sender.translationInView(view)
         
-        let velocity = sender.velocityInView(tableView)
+        let velocity = sender.velocityInView(view)
         
         
         
@@ -43,8 +43,11 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
             UIView.animateWithDuration(1, animations: {
                 if velocity.x > 0 {
                     self.leftMarginConstraint.constant = self.view.frame.size.width - 380
+                    //self.leftMarginConstraint.constant = self.view.frame.size.width - 50
+
                 }else {
                     self.leftMarginConstraint.constant = self.view.frame.size.width - 630
+                    //self.leftMarginConstraint.constant = 0
                 }
                 self.view.layoutIfNeeded()
             })
@@ -57,7 +60,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         
         tableView.delegate = self
         tableView.dataSource = self
-        self.leftMarginConstraint.constant = self.view.frame.size.width - 630
+        self.leftMarginConstraint.constant = 0
         
         uiRefreshControl.attributedTitle = Constants.HOME_TIMELINE_REFRESH_CONTROL_TITLE
         uiRefreshControl.addTarget(self, action:#selector(HomeTimelineViewController.reloadTweets), forControlEvents: UIControlEvents.ValueChanged)
